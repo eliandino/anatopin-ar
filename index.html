@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta
+    name="description"
+    content="AnatoPin AR educational chest anatomy prototype."
+  />
+  <title>AnatoPin AR</title>
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main id="app">
+    <!-- Live camera feed -->
+    <video
+      id="camera-video"
+      autoplay
+      muted
+      playsinline
+      aria-label="Live camera"
+    ></video>
+
+    <!-- Three.js inserts its transparent canvas here -->
+    <div id="three-root" aria-hidden="true"></div>
+
+    <!-- Decorative educational X-ray window -->
+    <div id="xray-window" aria-hidden="true">
+      <span>X-RAY VIEW</span>
+    </div>
+
+    <header class="top-bar">
+      <div>
+        <p class="eyebrow">EDUCATIONAL AR PROTOTYPE</p>
+        <h1>AnatoPin AR</h1>
+      </div>
+
+      <div id="status-pill" class="status-pill" data-state="idle">
+        <span class="status-dot"></span>
+        <span id="status-text">Camera off</span>
+      </div>
+    </header>
+
+    <section id="welcome-card" class="welcome-card">
+      <p class="eyebrow">CHEST MODULE</p>
+      <h2>Pin live anatomy to the chest</h2>
+      <p>
+        Start the rear camera, keep the shoulders and waist visible, and hold
+        the phone steadily. The prototype estimates the chest position using
+        body landmarks.
+      </p>
+
+      <button id="start-camera" class="primary-button" type="button">
+        Start camera
+      </button>
+
+      <p class="privacy-note">
+        Camera processing happens in the browser. This prototype does not
+        upload or save images.
+      </p>
+    </section>
+
+    <aside class="control-panel" aria-label="Anatomy controls">
+      <div class="mode-row">
+        <button
+          id="xray-button"
+          class="mode-button"
+          type="button"
+          aria-pressed="false"
+          disabled
+        >
+          X-ray
+        </button>
+
+        <button
+          id="live-button"
+          class="mode-button"
+          type="button"
+          aria-pressed="false"
+          disabled
+        >
+          Play live
+        </button>
+
+        <button
+          id="study-button"
+          class="mode-button"
+          type="button"
+          aria-pressed="false"
+          disabled
+        >
+          Study view
+        </button>
+      </div>
+
+      <details class="settings-card" open>
+        <summary>Layers and speed</summary>
+
+        <div class="layer-grid">
+          <label>
+            <input type="checkbox" data-layer="ribs" checked />
+            Rib cage
+          </label>
+
+          <label>
+            <input type="checkbox" data-layer="heart" checked />
+            Heart
+          </label>
+
+          <label>
+            <input type="checkbox" data-layer="lungs" checked />
+            Lungs
+          </label>
+
+          <label>
+            <input type="checkbox" data-layer="flow" checked />
+            Blood flow
+          </label>
+        </div>
+
+        <label class="range-control" for="bpm-slider">
+          <span>Heart rate</span>
+          <output id="bpm-output" for="bpm-slider">72 BPM</output>
+        </label>
+
+        <input
+          id="bpm-slider"
+          type="range"
+          min="40"
+          max="160"
+          value="72"
+          step="1"
+          disabled
+        />
+      </details>
+    </aside>
+
+    <div class="instruction-chip" id="instruction-chip">
+      Place the full chest inside the camera view.
+    </div>
+
+    <footer class="medical-note">
+      Educational visualization only. Not a diagnostic X-ray, medical scan, or
+      substitute for clinical training.
+    </footer>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
